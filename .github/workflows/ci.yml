@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write   # ✅ Needed for GitHub Pages deployment
+
 jobs:
   carbon-check:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
 
   deploy:
     needs: carbon-check
-    if: success()    # only run if carbon_check passed
+    if: success()   # only run if carbon_check.py exits with 0
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
